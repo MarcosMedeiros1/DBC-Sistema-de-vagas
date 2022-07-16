@@ -14,7 +14,7 @@
   <section class="login">
     <div>
       <h1>Login do Sistema</h1>
-    
+
       <form>
         <div>
           <label for="email">Email</label>
@@ -36,9 +36,7 @@
   </section>
 
   <section class="cadastroUsuario">
-    <div>
-      <h1>Cadastro</h1>
-    </div>
+    <h1>Cadastro</h1>
     <div>
       <form>
         <div>
@@ -69,186 +67,183 @@
           <input type="text">
         </div>
       </form>
-    </div>
-
-    <div>
-      <button>Voltar</button>
-      <button>Cadastrar</button>
+      <div>
+        <button>Voltar</button>
+        <button>Cadastrar</button>
+      </div>
     </div>
   </section>
 
-  <section class="cadastro Vaga">
-    <div>
-      <h1>Cadastro de Vaga</h1>
-    </div>
-
+  <section class="cadastroVaga">
+    <h1>Cadastro de Vaga</h1>
     <div>
       <form>
-        <label for="titulo">Título*</label>
-        <input type="text" name="titulo" id="inputVagaTitulo">
+        <div>
+          <label for="titulo">Título*</label>
+          <input type="text" name="titulo" id="inputVagaTitulo">
+        </div>
 
-        <label for="descricao">Descrição*</label>
-        <input type="text" name="descricao" id="inputVagaDescricao">
+        <div>
+          <label for="descricao">Descrição*</label>
+          <input type="text" name="descricao" id="inputVagaDescricao">
+        </div>
 
-        <label for="remuneracao">Remuneração*</label>
-        <input type="text" name="remuneracao" id="inputVagaRemuneracao">
+        <div>
+          <label for="remuneracao">Remuneração*</label>
+          <input type="text" name="remuneracao" id="inputVagaRemuneracao">
+        </div>
       </form>
-    </div>
-    <div>
-      <button>Voltar</button>
-      <button>Cadastrar</button>
-    </div>
-      
-    </div>
-  </section> 
-
-  <section class="tela de Detalhe de Vaga (Recrutador) ">
-    <div>
-      <h1>Detalhe da vaga</h1>
-    </div>
-    <div>
-      <div>
-        <h3>Titulo:</h3>
-        <span>Desenvolvedor Full-Stack</span>
-      </div>
-      <div>
-        <h3>Descrição:</h3>
-        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate vel vero accusamus!</span>
-      </div>
-      <div>
-        <h3>Remuneração:</h3>
-        <span>R$5.500,00 </span>
-      </div>
-    </div>
-    <div>
-      <h2>Candidatos na Vaga</h2>
-    </div>
-      <div>
-          <div>
-            <h2>Nome</h2>
-            <h2>Data de Nascimento</h2>
-            <p></p>
-          </div>
-          <div>
-          <ul id="candidatosDaVaga">
-             <li>
-                <span>Tiago Lucas</span>
-                <span>06/04/1994</span>
-                <button>Reprovar </button>
-              </li>
-              <li>
-                <span>Tiago Lucas</span>
-                <span>06/04/1994</span>
-                <button>Reprovar</button>
-              </li>
-              <li>
-                <span>Tiago Lucas</span>
-                <span>06/04/1994</span>
-                <button>Reprovar </button>
-              </li>
-              <li>
-                <span>Tiago Lucas</span>
-                <span>06/04/1994</span>
-                <button>Reprovar </button>
-              </li>
-              <li>
-                <span>Tiago Lucas</span>
-                <span>06/04/1994</span>
-                <button>Reprovar </button>
-              </li>
-              <li>
-                <span>Tiago Lucas</span>
-                <span>06/04/1994</span>
-                <button>Reprovar </button>
-              </li>
-          </ul>
-          </div>
-      </div>
-      </div>
       <div>
         <button>Voltar</button>
-        <button>Excluir Vaga</button>
+        <button>Cadastrar</button>
       </div>
-    
+    </div>
   </section>
 
-   <section class="TelaDeDetalhe De Vaga-Trabalhador">
-    <div>
-      <h1>Detalhe da Vaga</h1>
-    </div>
+  <section class="detalheVaga recrutador">
+    <h1>Detalhe da vaga</h1>
     <div>
       <div>
-        <h3>Titulo:</h3>
-        <span>Desenvolvedor Full-Stack</span>
+        <span><strong>Titulo: </strong>Desenvolvedor Full-Stack</span>
+
+        <span><strong>Descrição: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate vel vero accusamus!</span>
+
+        <span><strong>Remuneração: </strong>R$5.500,00</span>
       </div>
-      <div>
-        <h3>Descrição:</h3>
-        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate vel vero accusamus!</span>
-      </div>
-      <div>
-        <h3>Remuneração:</h3>
-        <span>R$5.500,00 </span>
-      </div>
-    </div>
-    
-    <div>
+
       <h2>Candidatos na Vaga</h2>
+
+      <div>
+        <div>
+          <h2>Nome</h2>
+          <h2>Data de Nascimento</h2>
+          <h2></h2>
+        </div>
+
+        <div>
+          <ul id="candidatosDaVaga">
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+              <button>Reprovar </button>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+              <button>Reprovar</button>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+              <button>Reprovar </button>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+              <button>Reprovar </button>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+              <button>Reprovar </button>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+              <button>Reprovar </button>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <button>Voltar</button>
+          <button>Excluir Vaga</button>
+        </div>
+      </div>
+
     </div>
 
-    <div>
-      <div>
-        <h2>Nome</h2>
-        <h2>Data de Nascimento</h2>
-      </div>
-      <div>
-        <ul>
-          <span>Tiago Lucas</span>
-          <span>06/04/1994</span>
-        </ul>
-        <ul>
-          <span>Tiago Lucas</span>
-          <span>06/04/1994</span>
-        </ul>
-        <ul>
-          <span>Tiago Lucas</span>
-          <span>06/04/1994</span>
-        </ul>
-        <ul>
-          <span>Tiago Lucas</span>
-          <span>06/04/1994</span>
-        </ul>
-      </div>
-    </div>
+  </section>
 
+  <section class="detalheVaga trabalhador">
+    <h1>Detalhe da vaga</h1>
     <div>
       <div>
-        <button>Voltar</button>
-        <button>Cancelar Candidatura</button>
-        <!-- <button>Cancelar Candidatura</button> -->
+        <span><strong>Titulo: </strong>Desenvolvedor Full-Stack</span>
+
+        <span><strong>Descrição: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate vel vero accusamus!</span>
+
+        <span><strong>Remuneração: </strong>R$5.500,00</span>
       </div>
+
+      <h2>Candidatos na Vaga</h2>
+
+      <div>
+        <div>
+          <h2>Nome</h2>
+          <h2>Data de Nascimento</h2>
+        </div>
+
+        <div>
+          <ul>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+            </li>
+            <li>
+              <span>Tiago Lucas</span>
+              <span>06/04/1994</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <button>Voltar</button>
+          <button>Cancelar candidatura</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <section class="home">
+    <h1>Vagas</h1>
     <div>
-      <div>
-        <h1>Vagas</h1>
-      </div>
-      <div>
-          <ul>
-            <li>
-              <span><strong>Título: </strong>Dev full-stack</span>
-              <span><strong>Remuneração: </strong>R$ 5000</span>
-            </li>
-          </ul>
-        </div>
+      <ul>
+        <li>
+          <span><strong>Título: </strong>Dev full-stack</span>
+          <span><strong>Remuneração: </strong>R$ 5000</span>
+        </li>
+        <li>
+          <span><strong>Título: </strong>Dev full-stack</span>
+          <span><strong>Remuneração: </strong>R$ 5000</span>
+        </li>
+        <li>
+          <span><strong>Título: </strong>Dev full-stack</span>
+          <span><strong>Remuneração: </strong>R$ 5000</span>
+        </li>
+      </ul>
+
       <div>
         <button>Sair</button>
         <button>Cadastrar Vaga</button>
       </div>
     </div>
   </section>
-
 </body>
 
 </html>
