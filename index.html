@@ -11,11 +11,11 @@
 
 <body>
 
-  <section class="login">
+  <section class="login" id="telaLogin">
     <div>
       <h1>Login do Sistema</h1>
 
-      <form>
+      <form id="formLogin">
         <div>
           <label for="email">Email</label>
           <input type="text" name="email" id="inputLoginEmail">
@@ -26,16 +26,16 @@
           <input type="password" name="senha" id="inputLoginSenha">
         </div>
 
-        <button>Login</button>
+        <button id="btnVerificarLogin">Login</button>
       </form>
     </div>
     <div>
       <a href="#">Esqueceu a senha?</a>
-      <a href="#">Não possui cadastro?</a>
+      <a href="#" id="naoPossuiCadastro">Não possui cadastro?</a>
     </div>
   </section>
 
-  <section class="cadastroUsuario">
+  <section class="remover" id="telaCadastro">
     <h1>Cadastro</h1>
     <div>
       <form>
@@ -68,13 +68,13 @@
         </div>
       </form>
       <div>
-        <button>Voltar</button>
+        <button id="voltarTelaLogin">Voltar</button>
         <button>Cadastrar</button>
       </div>
     </div>
   </section>
 
-  <section class="cadastroVaga">
+  <section class="cadastroVaga remover">
     <h1>Cadastro de Vaga</h1>
     <div>
       <form>
@@ -100,7 +100,7 @@
     </div>
   </section>
 
-  <section class="detalheVaga recrutador">
+  <section class="detalheVaga recrutador remover">
     <h1>Detalhe da vaga</h1>
     <div>
       <div>
@@ -164,7 +164,7 @@
 
   </section>
 
-  <section class="detalheVaga trabalhador">
+  <section class="detalheVaga trabalhador remover">
     <h1>Detalhe da vaga</h1>
     <div>
       <div>
@@ -220,7 +220,7 @@
     </div>
   </section>
 
-  <section class="home">
+  <section class="home remover" id="telaHome">
     <h1>Vagas</h1>
     <div>
       <ul>
@@ -239,11 +239,14 @@
       </ul>
 
       <div>
-        <button>Sair</button>
+        <button id="btnSair">Sair</button>
         <button>Cadastrar Vaga</button>
       </div>
     </div>
   </section>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./models/user.js"></script>
+<script src="script.js"></script>
 </body>
 
 </html>

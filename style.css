@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+.remover{
+  display: none;
+}
 
 * {
   margin: 0;
@@ -55,7 +58,7 @@ body {
   grid-template-columns: 1200px;
   justify-content: center;
   justify-items: center;
-  margin: auto;
+  margin: 100px auto;
 }
 
 section {
