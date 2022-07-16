@@ -1,8 +1,8 @@
 {
   "Usuarios": [
-  {
-    "email": "teste",
-    "senha": 123
-  }
+    {
+      "email": "teste",
+      "senha": 123
+    }
   ]
 }
