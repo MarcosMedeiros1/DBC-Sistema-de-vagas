@@ -20,7 +20,7 @@ const verificarLogin = (event) =>{
     let dadosLogin = formLogin.elements;
     let email = dadosLogin.email.value;
     let senha = dadosLogin.senha.value;
-    let retorno = buscar('usuarios');
+    let retorno = buscar(email,senha);
     console.log(retorno)
     // if (retorno.includes(email) && retorno.includes(senha)){
     //     console.log(`usuario encontrado${email} e senha ${senha}`)
