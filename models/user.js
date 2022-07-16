@@ -7,13 +7,12 @@ class Usuario {
     senha;
     candidaturas = []; // lista de Candidatura
 
-    constructor(tipo, nome, dataNascimento, email, senha, candidaturas){
+    constructor(tipo, nome, dataNascimento, email, senha){
         this.tipo = tipo;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.senha = senha;
-        this.candidaturas = candidaturas;
     }
   }
 
