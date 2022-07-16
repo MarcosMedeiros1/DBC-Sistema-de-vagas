@@ -39,7 +39,7 @@
 
   
   3.2) Se o usuário logado for "Recrutador":
-      a) Terá um botão de "Cahttps://filecloud.dbccompany.com.br/apps/files/?dir=/VemSer/Materiais%209%C2%AA%20Edi%C3%A7%C3%A3o/GIT/FRONT/M%C3%B3dulo%20JAVASCRIPT&fileid=3080140dastrar Vaga";
+      a) Terá um botão de "Cadastrar Vaga";
 
       3.2b) Teremos os seguintes campos no cadastro:
           a) Título (validar se não é uma string vazia apenas);

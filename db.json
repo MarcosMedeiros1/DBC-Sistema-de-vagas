@@ -2,48 +2,71 @@
   "usuarios": [
     {
       "tipo": "User",
-      "nome": "Luis Carlos",
-      "dataNascimento": "luis@gmail.com",
-      "email": "10/10/2000",
-      "senha": "Luis@luis1",
+      "nome": "teste",
+      "dataNascimento": "10/10/2000",
+      "email": "teste@email.com",
+      "senha": "Senha123!",
       "candidaturas": [],
       "id": 1
     },
     {
       "tipo": "Recruiter",
-      "nome": "Luis Carlos",
-      "dataNascimento": "luis@gmail.com",
-      "email": "10/10/2000",
-      "senha": "Luis@luis1",
+      "nome": "tecrutador",
+      "dataNascimento": "01/01/1900",
+      "email": "rec@email.com",
+      "senha": "Senha123!",
       "candidaturas": [],
       "id": 2
     },
     {
       "tipo": "User",
-      "nome": "Mariana Mariana",
-      "dataNascimento": "Luis@luis.com",
-      "email": "10/10/2000",
-      "senha": "Luis@luis1",
+      "nome": "João",
+      "dataNascimento": "03/02/2000",
+      "email": "joao@dbc.com",
+      "senha": "Senha123!",
       "candidaturas": [],
       "id": 3
     },
     {
       "tipo": "User",
-      "nome": "Mariana segundo",
-      "dataNascimento": "luis@gmail.com",
-      "email": "10/10/2000",
-      "senha": "luis@Luis1",
+      "nome": "asdfas",
+      "dataNascimento": "12/12/1221",
+      "email": "ada@asdas.com",
+      "senha": "senha123#A",
       "candidaturas": [],
       "id": 4
     },
     {
       "tipo": "User",
-      "nome": "aaaaaaaaaaaaa",
-      "dataNascimento": "luis@luis.com",
-      "email": "10/10/2000",
-      "senha": "luis@Luis1",
+      "nome": "adasdasd asdasd",
+      "dataNascimento": "01/01/2001",
+      "email": "email@email.com",
+      "senha": "Senha123!",
       "candidaturas": [],
       "id": 5
+    },
+    {
+      "tipo": "Recruiter",
+      "nome": "Recrutador Dois",
+      "dataNascimento": "01/02/2001",
+      "email": "re2@dbc.com",
+      "senha": "Senha123!",
+      "candidaturas": [],
+      "id": 6
+    }
+  ],
+  "vagas": [
+    {
+      "titulo": "a",
+      "descricao": "a",
+      "remuneracao": "",
+      "id": 1
+    },
+    {
+      "titulo": "Dev",
+      "descricao": "Dev front end",
+      "remuneracao": "R$ 12000",
+      "id": 2
     }
   ]
 }

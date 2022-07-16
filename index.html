@@ -35,14 +35,14 @@
     </div>
   </section>
 
-  <section class="remover" id="telaCadastro">
+  <section class="remover" id="telaCadastroUsuario">
     <h1>Cadastro</h1>
     <div>
       <form>
         <div>
           <label for="">Tipo de usuário</label>
           <select name="" id="tipoDeUsuário">
-            <option value="User">Usuario</option>
+            <option value="User">Usuário</option>
             <option value="Recruiter">Recrutador</option>
           </select>
         </div>
@@ -64,7 +64,7 @@
 
         <div>
           <label for="">Senha</label>
-          <input type="text" id="input-SenhaUsuario">
+          <input type="password" id="input-SenhaUsuario">
         </div>
       </form>
       <div>
@@ -74,7 +74,7 @@
     </div>
   </section>
 
-  <section class="cadastroVaga remover">
+  <section class="cadastroVaga remover" id="telaCadastroVaga">
     <h1>Cadastro de Vaga</h1>
     <div>
       <form>
@@ -90,12 +90,12 @@
 
         <div>
           <label for="remuneracao">Remuneração*</label>
-          <input type="text" name="remuneracao" id="inputVagaRemuneracao">
+          <input type="text" name="remuneracao" id="inputVagaRemuneracao" onkeypress="mascaraRemuneracao()">
         </div>
       </form>
       <div>
-        <button>Voltar</button>
-        <button>Cadastrar</button>
+        <button id="btnVoltarHomeRecrutador">Voltar</button>
+        <button id="btnConfirmarVaga">Cadastrar</button>
       </div>
     </div>
   </section>
@@ -240,13 +240,13 @@
 
       <div>
         <button id="btnSair">Sair</button>
-        <button>Cadastrar Vaga</button>
+        <button id="btnCadastrarVaga">Cadastrar Vaga</button>
       </div>
     </div>
   </section>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="./models/user.js"></script>
-<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./models/user.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
