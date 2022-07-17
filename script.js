@@ -17,8 +17,8 @@ const btnVoltarHomeRecrutador = document.getElementById(
 );
 const inputVagaRemuneracao = document.getElementById("inputVagaRemuneracao");
 const btnConfirmarVaga = document.getElementById("btnConfirmarVaga");
-const itemInsert = document.getElementById('listaVaga');
-let detalhesLi = document.querySelectorAll('.classVaga');  
+const itemInsert = document.getElementById("listaVaga");
+let detalhesLi = document.querySelectorAll(".classVaga");
 
 let usuarioLogado = {};
 
@@ -42,12 +42,10 @@ const verificarLogin = async (event) => {
   let senha = dadosLogin.senha.value;
   let retorno = await buscar("usuarios");
 
-
   if (email.trim().length === 0 || senha.trim().length === 0) {
     alert("Insira o email e a senha corretamente");
     return;
   }
-
 
   usuarioLogado = retorno.find((e) => e.email === email && e.senha === senha);
 
@@ -63,7 +61,7 @@ const verificarLogin = async (event) => {
 
   trocarTela(telaLogin, telaHome);
   mostrarVagaTabela();
-}; 
+};
 
 //Validações:
 const senhaValida = (senha) => {
@@ -302,40 +300,39 @@ const cadastrarVaga = () => {
   cadastrarNoDb("vagas", vaga);
   trocarTela(telaCadastroVaga, telaHome);
 };
-const mostrarVagaTabela = async () =>{
-  itemInsert.innerHTML= ''
-  
-  let vagas = await buscar('vagas')
-  console.log(vagas)
-  
-  vagas.forEach(vaga => {
-    const liVaga = document.createElement('li');
-    liVaga.setAttribute('id', vaga.id)
-    liVaga.classList.add('classVaga')
-    liVaga.setAttribute('onclick',`detalharVaga(${vaga.id})`)
-    const strongTitulo = document.createElement('strong')
-    const strongRemuneracao = document.createElement('strong')
-    const spanTitulo = document.createElement('span')
-    const spanRemuneracao = document.createElement('span')
-    
-    strongTitulo.textContent = 'titulo: '
-    spanTitulo.textContent = vaga.titulo
-    spanTitulo.prepend(strongTitulo)
-    strongRemuneracao.textContent = 'Remuneração: '
-    spanRemuneracao.textContent = vaga.remuneracao
-    spanRemuneracao.prepend(strongRemuneracao)
+const mostrarVagaTabela = async () => {
+  itemInsert.innerHTML = "";
 
-    liVaga.append(spanTitulo, spanRemuneracao)
-    itemInsert.appendChild(liVaga)
-  })
-}
-const detalharVaga = (id) =>{
-  console.log(id)
-}
+  let vagas = await buscar("vagas");
+  console.log(vagas);
+
+  vagas.forEach((vaga) => {
+    const liVaga = document.createElement("li");
+    liVaga.setAttribute("id", vaga.id);
+    liVaga.classList.add("classVaga");
+    liVaga.setAttribute("onclick", `detalharVaga(${vaga.id})`);
+    const strongTitulo = document.createElement("strong");
+    const strongRemuneracao = document.createElement("strong");
+    const spanTitulo = document.createElement("span");
+    const spanRemuneracao = document.createElement("span");
+
+    strongTitulo.textContent = "titulo: ";
+    spanTitulo.textContent = vaga.titulo;
+    spanTitulo.prepend(strongTitulo);
+    strongRemuneracao.textContent = "Remuneração: ";
+    spanRemuneracao.textContent = vaga.remuneracao;
+    spanRemuneracao.prepend(strongRemuneracao);
+
+    liVaga.append(spanTitulo, spanRemuneracao);
+    itemInsert.appendChild(liVaga);
+  });
+};
+const detalharVaga = (id) => {
+  console.log(id);
+};
 
 adicionarMascaraData();
 //eventos
-
 
 btnCadastrar.addEventListener("click", cadastrarTrabalhador);
 btnSair.addEventListener("click", () => trocarTela(telaHome, telaLogin));
