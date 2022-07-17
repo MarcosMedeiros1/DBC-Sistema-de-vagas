@@ -53,6 +53,24 @@
       "senha": "Senha123!",
       "candidaturas": [],
       "id": 6
+    },
+    {
+      "tipo": "User",
+      "nome": "nome",
+      "dataNascimento": "03/01/2000",
+      "email": "re2@dbc.com",
+      "senha": "Senha123!",
+      "candidaturas": [],
+      "id": 7
+    },
+    {
+      "tipo": "User",
+      "nome": "Tiago",
+      "dataNascimento": "10/10/2000",
+      "email": "tiago@dbc.com",
+      "senha": "Senha123!",
+      "candidaturas": [],
+      "id": 8
     }
   ],
   "vagas": [

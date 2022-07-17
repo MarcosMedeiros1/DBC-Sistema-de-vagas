@@ -4,23 +4,24 @@ const naoPossuiCadastro = document.getElementById("naoPossuiCadastro");
 const telaLogin = document.getElementById("telaLogin");
 const telaCadastroUsuario = document.getElementById("telaCadastroUsuario");
 const telaCadastroVaga = document.getElementById("telaCadastroVaga");
-const voltarTelaLogin = document.getElementById("voltarTelaLogin");
 const btnVerificarLogin = document.getElementById("btnVerificarLogin");
+const telaDetalheVaga = document.getElementById("telaDetalheVaga");
+const telaRecrutador = document.getElementById("telaRecrutador");
+const telaTrabalhador = document.getElementById("telaTrabalhador");
 const telaHome = document.getElementById("telaHome");
 const btnSair = document.getElementById("btnSair");
 const formLogin = document.getElementById("formLogin");
 const inputs = document.getElementsByTagName("input");
 const btnCadastrar = document.getElementById("btnCadastrar");
 const btnCadastrarVaga = document.getElementById("btnCadastrarVaga");
-const btnVoltarHomeRecrutador = document.getElementById(
-  "btnVoltarHomeRecrutador",
-);
 const inputVagaRemuneracao = document.getElementById("inputVagaRemuneracao");
 const btnConfirmarVaga = document.getElementById("btnConfirmarVaga");
 const itemInsert = document.getElementById("listaVaga");
+const esqueceuSenha = document.getElementById("esqueceuSenha");
+const btnCandidatar = document.getElementById("btnCandidatar");
 let detalhesLi = document.querySelectorAll(".classVaga");
-
 let usuarioLogado = {};
+let idVagaSelecionada;
 
 //Functions
 const apagarTudo = () => {
@@ -33,6 +34,10 @@ const trocarTela = (telaAtual, telaRetorno) => {
   telaAtual.classList.toggle("remover");
   telaRetorno.classList.toggle("remover");
   apagarTudo();
+};
+
+const remover = (tela) => {
+  tela.classList.toggle("remover");
 };
 
 const verificarLogin = async (event) => {
@@ -139,6 +144,14 @@ const adicionarMascaraData = () => {
   }
 };
 
+const buscaEmail = async (email) => {
+  let usuarios = await buscar("usuarios");
+
+  const emailExiste = await usuarios.some((usuario) => usuario.email === email);
+
+  return emailExiste;
+};
+
 const emailEhValido = (email) => {
   // retorna true ou false
   const emailSeparadoPorArroba = email.split("@");
@@ -177,9 +190,9 @@ const buscar = async (objeto) => {
 };
 
 const verificaNome = (nome) => {
-  let nomeSplitEspaco = nome.split("");
-  let nomeSemEspaco = nomeSplitEspaco.filter((x) => x !== " ");
-  let nomeVerificado = nomeSemEspaco.some((x) => !isNaN(x));
+  let nomeSplit = nome.split("");
+  let nomeSemEspaco = nomeSplit.filter((caractere) => caractere !== " ");
+  let nomeVerificado = nomeSemEspaco.some((nome) => !isNaN(nome));
   return nomeVerificado;
 };
 
@@ -200,7 +213,7 @@ const cadastrarNoDb = async (tipo, objeto) => {
   }
 };
 
-const cadastrarTrabalhador = () => {
+const cadastrarUsuario = async () => {
   const selectTipoUsuario = document.getElementById("tipoDeUsuário");
   const tipoUsuario =
     selectTipoUsuario.options[selectTipoUsuario.selectedIndex].value;
@@ -212,6 +225,7 @@ const cadastrarTrabalhador = () => {
   const inputEmail = document.getElementById("input-EmailUsuario");
   const email = inputEmail.value;
   const emailValido = emailEhValido(email);
+  const emailExiste = await buscaEmail(email);
 
   const inputData = document.getElementById("input-DataNascimento");
   const data = inputData.value;
@@ -230,14 +244,24 @@ const cadastrarTrabalhador = () => {
   }
 
   if (dataEhInvalida) {
-    alert("Data inválida");
+    alert("Data de nascimento inválida");
   }
 
   if (!senhaEhValida) {
     alert("Senha inválida");
   }
 
-  if (nomeValido || !emailValido || dataEhInvalida || !senhaEhValida) {
+  if (await buscaEmail(email)) {
+    alert("Email já cadastrado");
+  }
+
+  if (
+    nomeValido ||
+    !emailValido ||
+    dataEhInvalida ||
+    !senhaEhValida ||
+    emailExiste
+  ) {
     return;
   }
 
@@ -304,7 +328,6 @@ const mostrarVagaTabela = async () => {
   itemInsert.innerHTML = "";
 
   let vagas = await buscar("vagas");
-  console.log(vagas);
 
   vagas.forEach((vaga) => {
     const liVaga = document.createElement("li");
@@ -316,7 +339,7 @@ const mostrarVagaTabela = async () => {
     const spanTitulo = document.createElement("span");
     const spanRemuneracao = document.createElement("span");
 
-    strongTitulo.textContent = "titulo: ";
+    strongTitulo.textContent = "Título: ";
     spanTitulo.textContent = vaga.titulo;
     spanTitulo.prepend(strongTitulo);
     strongRemuneracao.textContent = "Remuneração: ";
@@ -328,25 +351,87 @@ const mostrarVagaTabela = async () => {
   });
 };
 const detalharVaga = (id) => {
-  console.log(id);
+  trocarTela(telaHome, telaDetalheVaga);
+  cabecalhoVaga(id);
+  if (usuarioLogado.tipo === "User") {
+    telaTrabalhador.classList.toggle("remover");
+    return;
+  }
+  if (usuarioLogado.tipo === "Recruiter") {
+    telaRecrutador.classList.toggle("remover");
+    return;
+  }
+};
+const cabecalhoVaga = async (id) => {
+  let vagas = await buscar("vagas");
+
+  let vaga = vagas.find((vaga) => vaga.id === id);
+  idVagaSelecionada = vaga.id;
+  const cabecalho = document.getElementById("cabecalho");
+  cabecalho.innerHTML = "";
+
+  const strongTitulo = document.createElement("strong");
+  const strongRemuneracao = document.createElement("strong");
+  const spanTitulo = document.createElement("span");
+  const spanRemuneracao = document.createElement("span");
+  const strongDescricao = document.createElement("strong");
+  const spanDescricao = document.createElement("span");
+
+  strongTitulo.textContent = "Título: ";
+  spanTitulo.textContent = vaga.titulo;
+  spanTitulo.prepend(strongTitulo);
+  strongRemuneracao.textContent = "Remuneração: ";
+  spanRemuneracao.textContent = vaga.remuneracao;
+  spanRemuneracao.prepend(strongRemuneracao);
+  strongDescricao.textContent = "Descrição: ";
+  spanDescricao.textContent = vaga.descricao;
+  spanDescricao.prepend(strongDescricao);
+
+  cabecalho.append(spanTitulo, spanDescricao, spanRemuneracao);
+};
+const buscarSenha = async () => {
+  const emailInformado = prompt("Informe seu Email, por favor: ");
+  let usuarios = await buscar("usuarios");
+
+  let emailEncontrado = usuarios.find(
+    (usuario) => usuario.email === emailInformado,
+  );
+
+  emailEncontrado
+    ? alert(`Sua senha é: ` + emailEncontrado.senha)
+    : alert("Email não encontrado");
+};
+
+const cadidatarVaga = async (event) => {
+  const candidatura = new Candidatura(
+    idVagaSelecionada,
+    usuarioLogado.id,
+    false,
+  );
+
+  const candidaturas = usuarioLogado.candidaturas.push(idVagaSelecionada);
+
+  try {
+    await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}}`, {
+      candidaturas: [candidaturas],
+    });
+    console.log("Colaborador editado com sucesso!");
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 adicionarMascaraData();
 //eventos
-
-btnCadastrar.addEventListener("click", cadastrarTrabalhador);
+esqueceuSenha.addEventListener("click", buscarSenha);
+btnCadastrar.addEventListener("click", cadastrarUsuario);
 btnSair.addEventListener("click", () => trocarTela(telaHome, telaLogin));
 btnVerificarLogin.addEventListener("click", verificarLogin);
 naoPossuiCadastro.addEventListener("click", () =>
   trocarTela(telaLogin, telaCadastroUsuario),
 );
-voltarTelaLogin.addEventListener("click", () =>
-  trocarTela(telaCadastroUsuario, telaLogin),
-);
 btnCadastrarVaga.addEventListener("click", () =>
   trocarTela(telaHome, telaCadastroVaga),
 );
-btnVoltarHomeRecrutador.addEventListener("click", () =>
-  trocarTela(telaCadastroVaga, telaHome),
-);
 btnConfirmarVaga.addEventListener("click", cadastrarVaga);
+btnCandidatar.addEventListener("click", cadidatarVaga);

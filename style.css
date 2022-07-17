@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
-.remover{
-  display: none;
+.remover {
+  display: none !important;
 }
 
 * {
@@ -138,6 +138,7 @@ label {
   font-size: 1.3rem;
 }
 
+/* Cabeçalho */
 .detalheVaga > div > div:first-child {
   display: grid;
   gap: 20px;
@@ -146,13 +147,15 @@ label {
   border-radius: 6px;
 }
 
-.detalheVaga > div > div:nth-child(3) {
+#telaRecrutador,
+#telaTrabalhador {
   display: grid;
   justify-content: center;
   grid-template-columns: 800px;
 }
 
-.detalheVaga > div > div:nth-child(3) > div:first-child {
+#telaRecrutador > div:first-child,
+#telaTrabalhador > div:first-child {
   display: flex;
   justify-content: space-between;
   background-color: #004e8f;
@@ -161,17 +164,20 @@ label {
   border-radius: 4px 4px 0 0;
 }
 
-.detalheVaga > div > div:nth-child(3) > div:nth-child(2) {
+#telaRecrutador > div:nth-child(2),
+#telaTrabalhador > div:nth-child(2) {
   border: 1px solid #004e8f;
   border-top: none;
   border-radius: 0 0 4px 4px;
 }
 
-.detalheVaga > div > div:nth-child(3) > div:last-child > ul {
+#telaRecrutador > div:last-child > ul,
+#telaTrabalhador > div:last-child > ul {
   border: 1px #004e8f;
 }
 
-.detalheVaga > div > div:nth-child(3) > div:nth-child(2) > ul > li {
+#telaRecrutador > div:nth-child(2) > ul > li,
+#telaTrabalhador > div:nth-child(2) > ul > li {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -179,15 +185,16 @@ label {
   border-top: 1px solid #000;
 }
 
-.detalheVaga > div > div:nth-child(3) > div:nth-child(2) button {
+#telaRecrutador > div:nth-child(2) button {
   background-color: #e53636;
 }
 
-.detalheVaga > div > div:nth-child(3) > div:nth-child(2) button:hover {
+#telaRecrutador > div:nth-child(2) button:hover {
   background-color: #a6a6a6;
 }
 
-.detalheVaga > div > div:nth-child(3) > div:last-child {
+#telaRecrutador > div:last-child,
+#telaTrabalhador > div:last-child {
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
