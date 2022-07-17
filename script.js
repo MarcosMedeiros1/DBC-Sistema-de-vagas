@@ -6,6 +6,7 @@ const telaCadastroUsuario = document.getElementById("telaCadastroUsuario");
 const telaCadastroVaga = document.getElementById("telaCadastroVaga");
 const voltarTelaLogin = document.getElementById("voltarTelaLogin");
 const btnVerificarLogin = document.getElementById("btnVerificarLogin");
+const telaRecrutador = document.getElementById("telaRecrutador")
 const telaHome = document.getElementById("telaHome");
 const btnSair = document.getElementById("btnSair");
 const formLogin = document.getElementById("formLogin");
@@ -18,8 +19,9 @@ const btnVoltarHomeRecrutador = document.getElementById(
 const inputVagaRemuneracao = document.getElementById("inputVagaRemuneracao");
 const btnConfirmarVaga = document.getElementById("btnConfirmarVaga");
 const itemInsert = document.getElementById('listaVaga');
+const btnVoltarLista = document.getElementById('btnVoltarLista');
+const esqueceuSenha = document.getElementById('esqueceuSenha');
 let detalhesLi = document.querySelectorAll('.classVaga');  
-
 let usuarioLogado = {};
 
 //Functions
@@ -306,7 +308,6 @@ const mostrarVagaTabela = async () =>{
   itemInsert.innerHTML= ''
   
   let vagas = await buscar('vagas')
-  console.log(vagas)
   
   vagas.forEach(vaga => {
     const liVaga = document.createElement('li');
@@ -330,13 +331,53 @@ const mostrarVagaTabela = async () =>{
   })
 }
 const detalharVaga = (id) =>{
-  console.log(id)
+  trocarTela(telaHome, telaRecrutador)
+  cabecalhoVaga(id)
+  if(usuarioLogado.tipo === 'User'){
+    //chama tela usuario
+  }else{
+    //chama tela Recrutador
+  }
 }
+const cabecalhoVaga = async (id) =>{
+  let vagas = await buscar('vagas')
 
+  let vaga = vagas.find(x => x.id === id)
+  const cabecalho = document.getElementById('cabecalho')
+  cabecalho.innerHTML = ''
+
+  const strongTitulo = document.createElement('strong')
+  const strongRemuneracao = document.createElement('strong')
+  const spanTitulo = document.createElement('span')
+  const spanRemuneracao = document.createElement('span')
+  const strongDescricao = document.createElement('strong')
+  const spanDescricao = document.createElement('span')
+
+  strongTitulo.textContent = 'Titulo: '
+  spanTitulo.textContent = vaga.titulo
+  spanTitulo.prepend(strongTitulo)
+  strongRemuneracao.textContent = 'Remuneração: '
+  spanRemuneracao.textContent = vaga.remuneracao
+  spanRemuneracao.prepend(strongRemuneracao)
+  strongDescricao.textContent = 'Descrição'
+  spanDescricao.textContent = vaga.descricao
+  spanDescricao.prepend(strongDescricao)
+
+  cabecalho.append(spanTitulo,spanDescricao,spanRemuneracao)
+}
+const buscarSenha = async () =>{
+  const emailInformado = prompt("Informe seu Email, por favor: ")
+  let usuarios = await buscar('usuarios')
+
+  let emailEncontrado = usuarios.find(x => x.email === emailInformado);
+
+  emailEncontrado ? alert(`Sua senha é: ` + emailEncontrado.senha) : alert('email não encontrado')
+}
+ 
 adicionarMascaraData();
 //eventos
-
-
+esqueceuSenha.addEventListener("click",buscarSenha)
+btnVoltarLista.addEventListener("click", () => trocarTela(telaRecrutador, telaHome))
 btnCadastrar.addEventListener("click", cadastrarTrabalhador);
 btnSair.addEventListener("click", () => trocarTela(telaHome, telaLogin));
 btnVerificarLogin.addEventListener("click", verificarLogin);
