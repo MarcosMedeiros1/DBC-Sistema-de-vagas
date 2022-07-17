@@ -6,7 +6,18 @@
       "dataNascimento": "10/10/2000",
       "email": "teste@email.com",
       "senha": "Senha123!",
-      "candidaturas": [],
+      "candidaturas": [
+        {
+          "idVaga": 1,
+          "idCandidato": 1,
+          "reprovado": false
+        },
+        {
+          "idVaga": 2,
+          "idCandidato": 1,
+          "reprovado": false
+        }
+      ],
       "id": 1
     },
     {
@@ -71,44 +82,43 @@
       "senha": "Senha123!",
       "candidaturas": [],
       "id": 8
+    },
+    {
+      "tipo": "User",
+      "nome": "asdas",
+      "dataNascimento": "10/10/2000",
+      "email": "re3@dbca.com",
+      "senha": "Senha123!",
+      "candidaturas": [],
+      "id": 9
     }
   ],
   "vagas": [
     {
-      "titulo": "Estagio dbc",
-      "descricao": "front end",
-      "remuneracao": "R$ 3333",
+      "titulo": "Vaga 1",
+      "descricao": "dev senior",
+      "remuneracao": "R$ 10000",
+      "candidatos": [
+        {
+          "idVaga": 1,
+          "idCandidato": 1,
+          "reprovado": false
+        }
+      ],
       "id": 1
     },
     {
-      "titulo": "Dev Senior",
-      "descricao": "java",
-      "remuneracao": "R$ 10",
+      "titulo": "Vaga 2",
+      "descricao": "devops",
+      "remuneracao": "R$ 120000",
+      "candidatos": [
+        {
+          "idVaga": 2,
+          "idCandidato": 1,
+          "reprovado": false
+        }
+      ],
       "id": 2
-    },
-    {
-      "titulo": "Dev AWS",
-      "descricao": "java",
-      "remuneracao": "R$ 100",
-      "id": 3
-    },
-    {
-      "titulo": "teste",
-      "descricao": "brasil",
-      "remuneracao": "R$ 123",
-      "id": 4
-    },
-    {
-      "titulo": "Teste",
-      "descricao": "luis",
-      "remuneracao": "R$ 222",
-      "id": 5
-    },
-    {
-      "titulo": "Desenvolvedor",
-      "descricao": "APPLE",
-      "remuneracao": "R$ 1000",
-      "id": 6
     }
   ]
 }

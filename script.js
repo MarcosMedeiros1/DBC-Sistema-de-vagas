@@ -21,7 +21,7 @@ const esqueceuSenha = document.getElementById("esqueceuSenha");
 const btnCandidatar = document.getElementById("btnCandidatar");
 let detalhesLi = document.querySelectorAll(".classVaga");
 let usuarioLogado = {};
-let idVagaSelecionada;
+let vagaSelecionada = {};
 
 //Functions
 const apagarTudo = () => {
@@ -350,23 +350,40 @@ const mostrarVagaTabela = async () => {
     itemInsert.appendChild(liVaga);
   });
 };
+
 const detalharVaga = (id) => {
   trocarTela(telaHome, telaDetalheVaga);
   cabecalhoVaga(id);
   if (usuarioLogado.tipo === "User") {
     telaTrabalhador.classList.toggle("remover");
+
+    const estaCandidatado = usuarioLogado.candidaturas.some(
+      (candidatura) => candidatura.idVaga === id,
+    );
+
+    if (estaCandidatado) {
+      btnCandidatar.textContent = "Cancelar candidatura";
+    } else {
+      btnCandidatar.textContent = "Candidatar-se";
+      btnCandidatar.addEventListener("click", candidatarVaga);
+    }
+
     return;
   }
   if (usuarioLogado.tipo === "Recruiter") {
     telaRecrutador.classList.toggle("remover");
+    btnCandidatar.textContent = "Excluir vaga";
+    btnCandidatar.addEventListener("click", excluirVaga);
+
     return;
   }
 };
+
 const cabecalhoVaga = async (id) => {
   let vagas = await buscar("vagas");
 
   let vaga = vagas.find((vaga) => vaga.id === id);
-  idVagaSelecionada = vaga.id;
+  vagaSelecionada = vaga;
   const cabecalho = document.getElementById("cabecalho");
   cabecalho.innerHTML = "";
 
@@ -402,24 +419,53 @@ const buscarSenha = async () => {
     : alert("Email não encontrado");
 };
 
-const cadidatarVaga = async (event) => {
+const candidatarVaga = async () => {
   const candidatura = new Candidatura(
-    idVagaSelecionada,
+    vagaSelecionada.id,
     usuarioLogado.id,
     false,
   );
 
-  const candidaturas = usuarioLogado.candidaturas.push(idVagaSelecionada);
+  const trabalhador = new Usuario(
+    usuarioLogado.tipo,
+    usuarioLogado.nome,
+    usuarioLogado.dataNascimento,
+    usuarioLogado.email,
+    usuarioLogado.senha,
+    usuarioLogado.candidaturas,
+  );
+
+  const vaga = new Vaga(
+    vagaSelecionada.titulo,
+    vagaSelecionada.descricao,
+    vagaSelecionada.remuneracao,
+    vagaSelecionada.candidatos,
+  );
+
+  trabalhador.candidaturas.push(candidatura);
+
+  vaga.candidatos.push(candidatura);
 
   try {
-    await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}}`, {
-      candidaturas: [candidaturas],
-    });
-    console.log("Colaborador editado com sucesso!");
+    await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}`, trabalhador);
+    btnCandidatar.textContent = "Cancelar candidatura";
+    alert("Candidatura realiza com sucesso");
+  } catch (e) {
+    console.log(e);
+  }
+
+  try {
+    await axios.put(`${BASE_URL}/vagas/${vagaSelecionada.id}`, vaga);
   } catch (e) {
     console.log(e);
   }
 };
+
+const cancelarCandidatura = () => {
+  usuarioLogado.id;
+};
+
+const excluirVaga = () => {};
 
 adicionarMascaraData();
 //eventos
@@ -434,4 +480,3 @@ btnCadastrarVaga.addEventListener("click", () =>
   trocarTela(telaHome, telaCadastroVaga),
 );
 btnConfirmarVaga.addEventListener("click", cadastrarVaga);
-btnCandidatar.addEventListener("click", cadidatarVaga);

@@ -7,16 +7,13 @@ class Usuario {
   senha;
   candidaturas = []; // lista de Candidatura
 
-  constructor(tipo, nome, dataNascimento, email, senha, candidatura) {
+  constructor(tipo, nome, dataNascimento, email, senha, candidatura = []) {
     this.tipo = tipo;
     this.nome = nome;
     this.dataNascimento = dataNascimento;
     this.email = email;
     this.senha = senha;
-    this.candidaturas.push(candidatura);
-  }
-  inserirCandidatura(idVaga) {
-    this.candidaturas.push(idVaga);
+    this.candidaturas = candidatura;
   }
 }
 
@@ -39,7 +36,7 @@ class Vaga {
   remuneracao; //(salvar no formato: R$ 3200.50)
   candidatos = []; // lista de Trabalhadores candidatados na vaga
 
-  constructor(titulo, descricao, remuneracao, candidatos) {
+  constructor(titulo, descricao, remuneracao, candidatos = []) {
     this.titulo = titulo;
     this.descricao = descricao;
     this.remuneracao = remuneracao;
