@@ -14,7 +14,7 @@
       "nome": "tecrutador",
       "dataNascimento": "01/01/1900",
       "email": "rec@email.com",
-      "senha": "Senha123!",
+      "senha": "Senha321!",
       "candidaturas": [],
       "id": 2
     },
@@ -57,16 +57,40 @@
   ],
   "vagas": [
     {
-      "titulo": "a",
-      "descricao": "a",
-      "remuneracao": "",
+      "titulo": "Estagio dbc",
+      "descricao": "front end",
+      "remuneracao": "R$ 3333",
       "id": 1
     },
     {
-      "titulo": "Dev",
-      "descricao": "Dev front end",
-      "remuneracao": "R$ 12000",
+      "titulo": "Dev Senior",
+      "descricao": "java",
+      "remuneracao": "R$ 10",
       "id": 2
+    },
+    {
+      "titulo": "Dev AWS",
+      "descricao": "java",
+      "remuneracao": "R$ 100",
+      "id": 3
+    },
+    {
+      "titulo": "teste",
+      "descricao": "brasil",
+      "remuneracao": "R$ 123",
+      "id": 4
+    },
+    {
+      "titulo": "Teste",
+      "descricao": "luis",
+      "remuneracao": "R$ 222",
+      "id": 5
+    },
+    {
+      "titulo": "Desenvolvedor",
+      "descricao": "APPLE",
+      "remuneracao": "R$ 1000",
+      "id": 6
     }
   ]
 }
