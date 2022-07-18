@@ -193,6 +193,9 @@ const verificaNome = (nome) => {
   let nomeSplit = nome.split("");
   let nomeSemEspaco = nomeSplit.filter((caractere) => caractere !== " ");
   let nomeVerificado = nomeSemEspaco.some((nome) => !isNaN(nome));
+  if (nome.trim() === "") {
+    return true;
+  }
   return nomeVerificado;
 };
 
@@ -605,7 +608,6 @@ const cancelarCandidatura = async () => {
     await axios.put(`${BASE_URL}/vagas/${vagaSelecionada.id}`, vaga);
     await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}`, trabalhador);
     mostrarCandidatosTrabalhador(vagaSelecionada.id);
-    console.log(trabalhador);
   } catch (e) {
     console.log(e);
   }
@@ -659,6 +661,7 @@ const reprovarCandidato = async (idCandidato) => {
         `${BASE_URL}/usuarios/${candidatoReprovado.id}`,
         trabalhador,
       );
+      mostrarCandidatosRecrutador(vagaSelecionada.id);
       await axios.put(`${BASE_URL}/vagas/${vagaSelecionada.id}`, vaga);
     } catch (e) {
       console.log(e);

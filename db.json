@@ -1,4 +1,107 @@
 {
-  "usuarios": [],
-  "vagas": []
+  "usuarios": [
+    {
+      "tipo": "User",
+      "nome": "Tiago",
+      "dataNascimento": "10/10/2000",
+      "email": "tiago@dbc.com",
+      "senha": "Tiago123@",
+      "candidaturas": [],
+      "id": 1
+    },
+    {
+      "tipo": "Recruiter",
+      "nome": "Joao",
+      "dataNascimento": "01/01/2000",
+      "email": "joao@dbc.com",
+      "senha": "Joao123@",
+      "candidaturas": [],
+      "id": 2
+    },
+    {
+      "tipo": "User",
+      "nome": "Maria",
+      "dataNascimento": "01/01/2000",
+      "email": "maria@dbc.com",
+      "senha": "Maria123!",
+      "candidaturas": [
+        {
+          "idVaga": 3,
+          "idCandidato": 3,
+          "reprovado": true
+        },
+        {
+          "idVaga": 2,
+          "idCandidato": 3,
+          "reprovado": false
+        }
+      ],
+      "id": 3
+    },
+    {
+      "tipo": "User",
+      "nome": "bob",
+      "dataNascimento": "01/01/2000",
+      "email": "bob@dbc.com",
+      "senha": "Bob1234@",
+      "candidaturas": [
+        {
+          "idVaga": 3,
+          "idCandidato": 4,
+          "reprovado": false
+        },
+        {
+          "idVaga": 2,
+          "idCandidato": 4,
+          "reprovado": true
+        }
+      ],
+      "id": 4
+    }
+  ],
+  "vagas": [
+    {
+      "titulo": "Dev DBC",
+      "descricao": "Front End",
+      "remuneracao": "R$ 10000",
+      "candidatos": [],
+      "id": 1
+    },
+    {
+      "titulo": "Java",
+      "descricao": "back end",
+      "remuneracao": "R$ 1000",
+      "candidatos": [
+        {
+          "idVaga": 2,
+          "idCandidato": 4,
+          "reprovado": true
+        },
+        {
+          "idVaga": 2,
+          "idCandidato": 3,
+          "reprovado": false
+        }
+      ],
+      "id": 2
+    },
+    {
+      "titulo": "RH",
+      "descricao": "Analista",
+      "remuneracao": "R$ 10000",
+      "candidatos": [
+        {
+          "idVaga": 3,
+          "idCandidato": 3,
+          "reprovado": true
+        },
+        {
+          "idVaga": 3,
+          "idCandidato": 4,
+          "reprovado": false
+        }
+      ],
+      "id": 3
+    }
+  ]
 }
