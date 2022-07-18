@@ -351,8 +351,9 @@ const mostrarVagaTabela = async () => {
   });
 };
 
-const detalharVaga = (id) => {
+const detalharVaga = async (id) => {
   trocarTela(telaHome, telaDetalheVaga);
+  await mostrarCandidatos(id)
   cabecalhoVaga(id);
   if (usuarioLogado.tipo === "User") {
     telaTrabalhador.classList.toggle("remover");
@@ -406,6 +407,41 @@ const cabecalhoVaga = async (id) => {
 
   cabecalho.append(spanTitulo, spanDescricao, spanRemuneracao);
 };
+
+const mostrarCandidatos = async (id) =>{
+  
+  const usuarios = await buscar("usuarios");
+
+  const candidatosInscritos = [];
+
+  usuarios.forEach((a) => {
+    a.candidaturas.forEach((b) => {
+      if (b.idVaga === id) {
+        candidatosInscritos.push(a);
+      }
+    });
+  });
+
+  const newUl = document.getElementById('candidatosDaVaga');
+  newUl.innerHTML=''
+  candidatosInscritos.forEach( a=> {
+
+    const liCandidato = document.createElement("li");
+    const spanNome = document.createElement("span");
+    spanNome.textContent = a.nome;
+    const spanData = document.createElement("span");
+    spanData.textContent = a.dataNascimento;
+    const btnReprovar = document.createElement("button");
+    btnReprovar.textContent = 'Reprovar'
+    
+    liCandidato.append(spanNome, spanData, btnReprovar)
+    newUl.append(liCandidato)
+  }
+  
+  )
+}
+
+
 const buscarSenha = async () => {
   const emailInformado = prompt("Informe seu Email, por favor: ");
   let usuarios = await buscar("usuarios");
@@ -465,7 +501,22 @@ const cancelarCandidatura = () => {
   usuarioLogado.id;
 };
 
-const excluirVaga = () => {};
+const excluirVaga = async () => {
+  
+    const idDaVaga = vagaSelecionada.id
+    let confirmacao = confirm('Realmente deseja apagar a vaga ?')
+    if(confirmacao){
+      try {
+        await axios.delete(`${BASE_URL}/vagas/${idDaVaga}`);
+        mostrarVagaTabela();
+        trocarTela(telaDetalheVaga, telaHome)
+        alert("vaga excluída com sucesso!");
+      } catch (e) {
+        console.log(e);
+      }
+    }
+};
+
 
 adicionarMascaraData();
 //eventos

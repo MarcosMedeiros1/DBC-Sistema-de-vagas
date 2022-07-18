@@ -35,7 +35,13 @@
       "dataNascimento": "03/02/2000",
       "email": "joao@dbc.com",
       "senha": "Senha123!",
-      "candidaturas": [],
+      "candidaturas": [
+        {
+          "idVaga": 1,
+          "idCandidato": 3,
+          "reprovado": false
+        }
+      ],
       "id": 3
     },
     {
@@ -95,30 +101,25 @@
   ],
   "vagas": [
     {
-      "titulo": "Vaga 1",
-      "descricao": "dev senior",
-      "remuneracao": "R$ 10000",
-      "candidatos": [
-        {
-          "idVaga": 1,
-          "idCandidato": 1,
-          "reprovado": false
-        }
-      ],
+      "titulo": "emprego novo",
+      "descricao": "javascript",
+      "remuneracao": "R$ 800",
+      "candidatos": [],
       "id": 1
     },
     {
-      "titulo": "Vaga 2",
-      "descricao": "devops",
-      "remuneracao": "R$ 120000",
-      "candidatos": [
-        {
-          "idVaga": 2,
-          "idCandidato": 1,
-          "reprovado": false
-        }
-      ],
+      "titulo": "devSenior",
+      "descricao": "Java",
+      "remuneracao": "R$ 100",
+      "candidatos": [],
       "id": 2
+    },
+    {
+      "titulo": "teste",
+      "descricao": "dbc",
+      "remuneracao": "R$ 2",
+      "candidatos": [],
+      "id": 3
     }
   ]
 }
