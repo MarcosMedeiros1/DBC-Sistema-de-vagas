@@ -465,7 +465,7 @@ const cancelarCandidatura = () => {
   usuarioLogado.id;
 };
 
-const excluirVaga = () => {};
+const excluirVaga = async () => {};
 
 adicionarMascaraData();
 //eventos
