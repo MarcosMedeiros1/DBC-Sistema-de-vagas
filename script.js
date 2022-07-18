@@ -608,7 +608,6 @@ const cancelarCandidatura = async () => {
     await axios.put(`${BASE_URL}/vagas/${vagaSelecionada.id}`, vaga);
     await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}`, trabalhador);
     mostrarCandidatosTrabalhador(vagaSelecionada.id);
-    console.log(trabalhador);
   } catch (e) {
     console.log(e);
   }
