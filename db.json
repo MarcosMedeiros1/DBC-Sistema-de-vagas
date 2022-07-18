@@ -11,6 +11,11 @@
           "idVaga": 2,
           "idCandidato": 1,
           "reprovado": false
+        },
+        {
+          "idVaga": 1,
+          "idCandidato": 1,
+          "reprovado": true
         }
       ],
       "id": 1
@@ -30,7 +35,13 @@
       "dataNascimento": "03/02/2000",
       "email": "joao@dbc.com",
       "senha": "Senha123!",
-      "candidaturas": [],
+      "candidaturas": [
+        {
+          "idVaga": 1,
+          "idCandidato": 3,
+          "reprovado": false
+        }
+      ],
       "id": 3
     },
     {
@@ -69,12 +80,7 @@
       "candidatos": [
         {
           "idVaga": 1,
-          "idCandidato": 1,
-          "reprovado": false
-        },
-        {
-          "idVaga": 1,
-          "idCandidato": 1,
+          "idCandidato": 3,
           "reprovado": false
         },
         {
@@ -90,11 +96,6 @@
       "descricao": "Java",
       "remuneracao": "R$ 100",
       "candidatos": [
-        {
-          "idVaga": 2,
-          "idCandidato": 1,
-          "reprovado": false
-        },
         {
           "idVaga": 2,
           "idCandidato": 1,

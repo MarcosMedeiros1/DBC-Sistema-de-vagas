@@ -356,6 +356,7 @@ const detalharVaga = async (id) => {
   cabecalhoVaga(id);
   if (usuarioLogado.tipo === "User") {
     await mostrarCandidatosTrabalhador(id);
+    verificaReprovacao(id);
 
     telaTrabalhador.classList.toggle("remover");
 
@@ -380,6 +381,20 @@ const detalharVaga = async (id) => {
     btnCandidatar.textContent = "Excluir vaga";
     return;
   }
+};
+
+const verificaReprovacao = (id) => {
+  usuarioLogado.candidaturas.forEach((candidatura) => {
+    if (candidatura.idVaga === id) {
+      if (candidatura.reprovado === true) {
+        btnCandidatar.disabled = true;
+        btnCandidatar.style.backgroundColor = "#a6a6a6";
+      } else {
+        btnCandidatar.disabled = false;
+        btnCandidatar.style.backgroundColor = "#004e8f";
+      }
+    }
+  });
 };
 
 const cabecalhoVaga = async (id) => {
@@ -426,17 +441,19 @@ const mostrarCandidatosRecrutador = async (id) => {
   const ulRecrutador = document.getElementById("candidatosDaVagaRecrutador");
   ulRecrutador.innerHTML = "";
 
-  candidatosInscritos.forEach((a) => {
+  candidatosInscritos.forEach((candidato) => {
     const liRecrutador = document.createElement("li");
 
     const spanNome = document.createElement("span");
-    spanNome.textContent = a.nome;
+    spanNome.textContent = candidato.nome;
 
     const spanData = document.createElement("span");
-    spanData.textContent = a.dataNascimento;
+    spanData.textContent = candidato.dataNascimento;
 
     const btnReprovar = document.createElement("button");
     btnReprovar.textContent = "Reprovar";
+    btnReprovar.setAttribute("onclick", `reprovarCandidato(${candidato.id})`);
+    btnReprovar.setAttribute("id", `${candidato.id}`);
 
     liRecrutador.append(spanNome, spanData, btnReprovar);
 
@@ -464,6 +481,13 @@ const mostrarCandidatosTrabalhador = async (id) => {
     const liTrabalhador = document.createElement("li");
     const spanNome = document.createElement("span");
     spanNome.textContent = a.nome;
+
+    a.candidaturas.forEach((candidatura) => {
+      if (candidatura.reprovado === true) {
+        console.log("aqui");
+        spanNome.style.color = "#e53636";
+      }
+    });
 
     const spanData = document.createElement("span");
     spanData.textContent = a.dataNascimento;
@@ -550,6 +574,10 @@ const cancelarCandidatura = async () => {
     usuarioLogado.candidaturas,
   );
 
+  vagaSelecionada.candidatos = vagaSelecionada.candidatos.filter(
+    (c) => c.idCandidato !== usuarioLogado.id,
+  );
+
   const vaga = new Vaga(
     vagaSelecionada.titulo,
     vagaSelecionada.descricao,
@@ -558,6 +586,7 @@ const cancelarCandidatura = async () => {
   );
 
   try {
+    await axios.put(`${BASE_URL}/vagas/${vagaSelecionada.id}`, vaga);
     await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}`, trabalhador);
     mostrarCandidatosTrabalhador(vagaSelecionada.id);
     console.log(trabalhador);
@@ -567,14 +596,69 @@ const cancelarCandidatura = async () => {
   }
 };
 
-const excluirVaga = async () => {
-  const idDaVaga = vagaSelecionada.id;
+const reprovarCandidato = async (idCandidato) => {
+  const confirmacao = confirm("Cofirmar reprovação do candidato?");
 
-  let confirmacao = confirm("Realmente deseja apagar a vaga ?");
+  if (confirmacao) {
+    const usuarios = await buscar("usuarios");
+    let candidatoReprovado = {};
+
+    usuarios.forEach((candidato) => {
+      if (candidato.id === idCandidato) {
+        candidatoReprovado = candidato;
+      }
+    });
+
+    const btnReprovar = document.getElementById(candidatoReprovado.id);
+
+    candidatoReprovado.candidaturas.forEach((c) => {
+      if (c.idVaga === vagaSelecionada.id) {
+        c.reprovado = true;
+      }
+    });
+
+    const trabalhador = new Usuario(
+      candidatoReprovado.tipo,
+      candidatoReprovado.nome,
+      candidatoReprovado.dataNascimento,
+      candidatoReprovado.email,
+      candidatoReprovado.senha,
+      candidatoReprovado.candidaturas,
+    );
+
+    try {
+      await axios.put(
+        `${BASE_URL}/usuarios/${candidatoReprovado.id}`,
+        trabalhador,
+      );
+      btnReprovar.disabled = true;
+      btnReprovar.style.background = "#a6a6a6";
+    } catch (e) {
+      console.log(e);
+    }
+  }
+};
+
+const excluirVaga = async () => {
+  // const usuarios = await buscar("usuarios");
+
+  // const candidatosInscritos = [];
+
+  // usuarios.forEach((a) => {
+  //   a.candidaturas.forEach((b) => {
+  //     if (b.idVaga === vagaSelecionada.id) {
+  //       candidatosInscritos.push(a);
+  //     }
+  //   });
+  // });
+
+  // candidatosInscritos.forEach((c) => cancelarCandidatura(c));
+
+  let confirmacao = confirm("Realmente deseja apagar a vaga?");
 
   if (confirmacao) {
     try {
-      await axios.delete(`${BASE_URL}/vagas/${idDaVaga}`);
+      await axios.delete(`${BASE_URL}/vagas/${vagaSelecionada.id}`);
       mostrarVagaTabela();
       trocarTela(telaDetalheVaga, telaHome);
       alert("Vaga excluída com sucesso!");
