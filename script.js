@@ -193,6 +193,9 @@ const verificaNome = (nome) => {
   let nomeSplit = nome.split("");
   let nomeSemEspaco = nomeSplit.filter((caractere) => caractere !== " ");
   let nomeVerificado = nomeSemEspaco.some((nome) => !isNaN(nome));
+  if (nome.trim() === ''){
+    return true
+  }
   return nomeVerificado;
 };
 
