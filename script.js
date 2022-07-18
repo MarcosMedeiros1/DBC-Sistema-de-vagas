@@ -351,10 +351,12 @@ const mostrarVagaTabela = async () => {
   });
 };
 
-const detalharVaga = (id) => {
+const detalharVaga = async (id) => {
   trocarTela(telaHome, telaDetalheVaga);
   cabecalhoVaga(id);
   if (usuarioLogado.tipo === "User") {
+    await mostrarCandidatosTrabalhador(id);
+
     telaTrabalhador.classList.toggle("remover");
 
     const estaCandidatado = usuarioLogado.candidaturas.some(
@@ -363,6 +365,7 @@ const detalharVaga = (id) => {
 
     if (estaCandidatado) {
       btnCandidatar.textContent = "Cancelar candidatura";
+      btnCandidatar.addEventListener("click", cancelarCandidatura);
     } else {
       btnCandidatar.textContent = "Candidatar-se";
       btnCandidatar.addEventListener("click", candidatarVaga);
@@ -371,10 +374,10 @@ const detalharVaga = (id) => {
     return;
   }
   if (usuarioLogado.tipo === "Recruiter") {
+    await mostrarCandidatosRecrutador(id);
+
     telaRecrutador.classList.toggle("remover");
     btnCandidatar.textContent = "Excluir vaga";
-    btnCandidatar.addEventListener("click", excluirVaga);
-
     return;
   }
 };
@@ -406,6 +409,71 @@ const cabecalhoVaga = async (id) => {
 
   cabecalho.append(spanTitulo, spanDescricao, spanRemuneracao);
 };
+
+const mostrarCandidatosRecrutador = async (id) => {
+  const usuarios = await buscar("usuarios");
+
+  const candidatosInscritos = [];
+
+  usuarios.forEach((a) => {
+    a.candidaturas.forEach((b) => {
+      if (b.idVaga === id) {
+        candidatosInscritos.push(a);
+      }
+    });
+  });
+
+  const ulRecrutador = document.getElementById("candidatosDaVagaRecrutador");
+  ulRecrutador.innerHTML = "";
+
+  candidatosInscritos.forEach((a) => {
+    const liRecrutador = document.createElement("li");
+
+    const spanNome = document.createElement("span");
+    spanNome.textContent = a.nome;
+
+    const spanData = document.createElement("span");
+    spanData.textContent = a.dataNascimento;
+
+    const btnReprovar = document.createElement("button");
+    btnReprovar.textContent = "Reprovar";
+
+    liRecrutador.append(spanNome, spanData, btnReprovar);
+
+    ulRecrutador.append(liRecrutador);
+  });
+};
+
+const mostrarCandidatosTrabalhador = async (id) => {
+  const usuarios = await buscar("usuarios");
+
+  const candidatosInscritos = [];
+
+  usuarios.forEach((a) => {
+    a.candidaturas.forEach((b) => {
+      if (b.idVaga === id) {
+        candidatosInscritos.push(a);
+      }
+    });
+  });
+
+  const ulTrabalhador = document.getElementById("candidatosDaVagaTrabalhador");
+  ulTrabalhador.innerHTML = "";
+
+  candidatosInscritos.forEach((a) => {
+    const liTrabalhador = document.createElement("li");
+    const spanNome = document.createElement("span");
+    spanNome.textContent = a.nome;
+
+    const spanData = document.createElement("span");
+    spanData.textContent = a.dataNascimento;
+
+    liTrabalhador.append(spanNome, spanData);
+
+    ulTrabalhador.append(liTrabalhador);
+  });
+};
+
 const buscarSenha = async () => {
   const emailInformado = prompt("Informe seu Email, por favor: ");
   let usuarios = await buscar("usuarios");
@@ -449,6 +517,9 @@ const candidatarVaga = async () => {
   try {
     await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}`, trabalhador);
     btnCandidatar.textContent = "Cancelar candidatura";
+    btnCandidatar.removeEventListener("click", candidatarVaga);
+    btnCandidatar.addEventListener("click", cancelarCandidatura);
+    mostrarCandidatosTrabalhador(vagaSelecionada.id);
     alert("Candidatura realiza com sucesso");
   } catch (e) {
     console.log(e);
@@ -461,11 +532,57 @@ const candidatarVaga = async () => {
   }
 };
 
-const cancelarCandidatura = () => {
-  usuarioLogado.id;
+const cancelarCandidatura = async () => {
+  btnCandidatar.textContent = "Candidatar-se";
+  btnCandidatar.removeEventListener("click", cancelarCandidatura);
+  btnCandidatar.addEventListener("click", candidatarVaga);
+
+  usuarioLogado.candidaturas = usuarioLogado.candidaturas.filter(
+    (c) => c.idVaga !== vagaSelecionada.id,
+  );
+
+  const trabalhador = new Usuario(
+    usuarioLogado.tipo,
+    usuarioLogado.nome,
+    usuarioLogado.dataNascimento,
+    usuarioLogado.email,
+    usuarioLogado.senha,
+    usuarioLogado.candidaturas,
+  );
+
+  const vaga = new Vaga(
+    vagaSelecionada.titulo,
+    vagaSelecionada.descricao,
+    vagaSelecionada.remuneracao,
+    vagaSelecionada.candidatos,
+  );
+
+  try {
+    await axios.put(`${BASE_URL}/usuarios/${usuarioLogado.id}`, trabalhador);
+    mostrarCandidatosTrabalhador(vagaSelecionada.id);
+    console.log(trabalhador);
+    alert("Candidatura cancelada com sucesso");
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-const excluirVaga = async () => {};
+const excluirVaga = async () => {
+  const idDaVaga = vagaSelecionada.id;
+
+  let confirmacao = confirm("Realmente deseja apagar a vaga ?");
+
+  if (confirmacao) {
+    try {
+      await axios.delete(`${BASE_URL}/vagas/${idDaVaga}`);
+      mostrarVagaTabela();
+      trocarTela(telaDetalheVaga, telaHome);
+      alert("Vaga excluída com sucesso!");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+};
 
 adicionarMascaraData();
 //eventos

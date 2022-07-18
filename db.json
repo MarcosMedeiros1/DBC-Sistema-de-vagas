@@ -6,7 +6,13 @@
       "dataNascimento": "10/10/2000",
       "email": "teste@email.com",
       "senha": "Senha123!",
-      "candidaturas": [],
+      "candidaturas": [
+        {
+          "idVaga": 2,
+          "idCandidato": 1,
+          "reprovado": false
+        }
+      ],
       "id": 1
     },
     {
@@ -57,40 +63,52 @@
   ],
   "vagas": [
     {
-      "titulo": "Estagio dbc",
-      "descricao": "front end",
-      "remuneracao": "R$ 3333",
+      "titulo": "emprego novo",
+      "descricao": "javascript",
+      "remuneracao": "R$ 800",
+      "candidatos": [
+        {
+          "idVaga": 1,
+          "idCandidato": 1,
+          "reprovado": false
+        },
+        {
+          "idVaga": 1,
+          "idCandidato": 1,
+          "reprovado": false
+        },
+        {
+          "idVaga": 1,
+          "idCandidato": 1,
+          "reprovado": false
+        }
+      ],
       "id": 1
     },
     {
-      "titulo": "Dev Senior",
-      "descricao": "java",
-      "remuneracao": "R$ 10",
+      "titulo": "devSenior",
+      "descricao": "Java",
+      "remuneracao": "R$ 100",
+      "candidatos": [
+        {
+          "idVaga": 2,
+          "idCandidato": 1,
+          "reprovado": false
+        },
+        {
+          "idVaga": 2,
+          "idCandidato": 1,
+          "reprovado": false
+        }
+      ],
       "id": 2
     },
     {
-      "titulo": "Dev AWS",
-      "descricao": "java",
-      "remuneracao": "R$ 100",
-      "id": 3
-    },
-    {
       "titulo": "teste",
-      "descricao": "brasil",
-      "remuneracao": "R$ 123",
-      "id": 4
-    },
-    {
-      "titulo": "Teste",
-      "descricao": "luis",
-      "remuneracao": "R$ 222",
-      "id": 5
-    },
-    {
-      "titulo": "Desenvolvedor",
-      "descricao": "APPLE",
-      "remuneracao": "R$ 1000",
-      "id": 6
+      "descricao": "dbc",
+      "remuneracao": "R$ 2",
+      "candidatos": [],
+      "id": 3
     }
   ]
 }
